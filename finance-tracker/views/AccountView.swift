@@ -9,14 +9,10 @@ import SwiftUI
 
 struct AccountView: View {
     @State private var currencyCode: CurrencyCode = CurrencyCode.GBP
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationStack {
-            Image(systemName: "person.circle.fill")
-                .font(.system(size: 70))
-                .padding(.top, 50)
-            Text("Patrick McManamon")
-                .font(.largeTitle)
             Form {
                 
                 Section(header: Text("Appearance")) {
@@ -28,10 +24,18 @@ struct AccountView: View {
                 
                 Section(header: Text("Account")) {
                     Button("Logout") {}
+                        .foregroundStyle(.red)
+                }
+            }
+            .navigationTitle(Text("My Account"))
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Exit", systemImage: "xmark") {
+                        dismiss()
+                    }
                 }
             }
         }
-        
     }
 }
 

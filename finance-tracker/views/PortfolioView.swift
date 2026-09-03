@@ -72,7 +72,10 @@ struct PortfolioView: View {
                     }
                     
                     Button("My Account", systemImage: "person.circle") {
-                        // open my account sheet logic
+                        accountSheetOpen.toggle()
+                    }
+                    .sheet(isPresented: $accountSheetOpen) {
+                        AccountView()
                     }
                 }
             }
