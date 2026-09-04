@@ -27,13 +27,10 @@ struct SymbolCardView: View {
             .padding(5)
             Spacer()
             VStack(alignment: .trailing) {
-                Text(price.formatted(.currency(code: "GBP")))
+                Text(price.formatted(.currency(code: AppSettings.defaultCurrency)))
                     .font(.body)
                     .fontWeight(.semibold)
                 PercentagePillView(percentage: dailyPercentageIncrease)
-            }
-            VStack {
-                Image(systemName: "chevron.right")
             }
             .bold()
         }

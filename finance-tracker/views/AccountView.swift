@@ -8,20 +8,11 @@
 import SwiftUI
 
 struct AccountView: View {
-    @State private var currencyCode: CurrencyCode = CurrencyCode.GBP
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationStack {
             Form {
-                
-                Section(header: Text("Appearance")) {
-                    Picker("Currency", selection: $currencyCode) {
-                        Text("GBP").tag(CurrencyCode.GBP)
-                        Text("USD").tag(CurrencyCode.USD)
-                    }
-                }
-                
                 Section(header: Text("Account")) {
                     Button("Logout") {}
                         .foregroundStyle(.red)

@@ -27,40 +27,56 @@ struct PortfolioView: View {
                 
                 
                 Section {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Total")
-                                .font(.title)
-                                .bold()
-                            Text("Cash")
-                                .font(.title2)
-                            
+                    NavigationLink {
+                        CashView()
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("Total")
+                                    .font(.title)
+                                    .bold()
+                                Text("Cash")
+                                    .font(.title2)
+                                
+                            }
+                            Spacer()
+                            VStack(alignment: .trailing,spacing: 10) {
+                                Text("£56,569")
+                                    .font(.title)
+                                    .bold()
+                                Text("£2,344")
+                                    .font(.title2)
+                            }
                         }
-                        Spacer()
-                        VStack(alignment: .trailing,spacing: 10) {
-                            Text("£56,569")
-                                .font(.title)
-                                .bold()
-                            Text("£2,344")
-                                .font(.title2)
-                        }
-                        VStack {
-                            Image(systemName: "chevron.right")
-                        }
-                        .bold()
+                        .padding(5)
                     }
-                    .padding(5)
                 }
-                
+                                
                 Section(header: Text("Accounts"), content: {
-                    SymbolCardView(cardTitle: "Western Markets", cardDescription: "Stocks and Shares ISA", price: 30000, dailyPercentageIncrease: -0.01)
+                    NavigationLink {
+                        Text("Western Markets")
+                    } label: {
+                        SymbolCardView(cardTitle: "Western Markets", cardDescription: "Stocks and Shares ISA", price: 30000, dailyPercentageIncrease: -0.01)
+                    }
                     
-                    SymbolCardView(cardTitle: "Eastern Markets", cardDescription: "Stocks and Shares ISA", price: 15000, dailyPercentageIncrease: 0.05)
+                    NavigationLink {
+                        Text("Eastern Markets")
+                    } label: {
+                        SymbolCardView(cardTitle: "Eastern Markets", cardDescription: "Stocks and Shares ISA", price: 15000, dailyPercentageIncrease: 0.05)
+                    }
                     
-                    SymbolCardView(cardTitle: "Cash Fund", cardDescription: "Cash ISA", price: 2000, dailyPercentageIncrease: 0.005)
                     
-                    SymbolCardView(cardTitle: "Pension", cardDescription: "SIPP", price: 14569, dailyPercentageIncrease: 0.5)
+                    NavigationLink {
+                        Text("Cash Fund")
+                    } label: {
+                        SymbolCardView(cardTitle: "Cash Fund", cardDescription: "Cash ISA", price: 2000, dailyPercentageIncrease: 0.005)
+                    }
                     
+                    NavigationLink {
+                        Text("Pension")
+                    } label: {
+                        SymbolCardView(cardTitle: "Pension", cardDescription: "SIPP", price: 14569, dailyPercentageIncrease: 0.5)
+                    }
                 })
                 .headerProminence(.increased)
             }
