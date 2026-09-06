@@ -31,6 +31,6 @@ struct LoginView: View {
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(SampleData())) {
     LoginView()
 }

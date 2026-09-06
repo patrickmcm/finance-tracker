@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		2EFC1D9E3048213200F4D16A /* finance-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "finance-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EFC1D9E3048213200F4D16A /* finance-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "finance-tracker.app"; path = "/Users/patrickmcm/finance-tracker/finance-tracker/build/Debug-iphoneos/finance-tracker.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,16 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				2EFC1DA03048213200F4D16A /* finance-tracker */,
-				2EFC1D9F3048213200F4D16A /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		2EFC1D9F3048213200F4D16A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2EFC1D9E3048213200F4D16A /* finance-tracker.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,7 +86,7 @@
 			mainGroup = 2EFC1D953048213200F4D16A;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 2EFC1D9F3048213200F4D16A /* Products */;
+			productRefGroup = 2EFC1D953048213200F4D16A;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

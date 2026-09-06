@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct finance_trackerApp: App {
+    @State private var networkManager: NetworkManager = NetworkManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(networkManager)
         }
     }
 }

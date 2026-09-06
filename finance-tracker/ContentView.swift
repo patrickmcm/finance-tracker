@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        PortfolioView()
+        NavigationStack {
+            PortfolioView()
+        }
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(SampleData())) {
     ContentView()
 }

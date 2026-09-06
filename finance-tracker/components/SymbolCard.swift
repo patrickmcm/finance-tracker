@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SymbolCardView: View {
+struct SymbolCard: View {
     let cardTitle: String
     let cardDescription: String
     let price: Float
@@ -30,7 +30,7 @@ struct SymbolCardView: View {
                 Text(price.formatted(.currency(code: AppSettings.defaultCurrency)))
                     .font(.body)
                     .fontWeight(.semibold)
-                PercentagePillView(percentage: dailyPercentageIncrease)
+                PercentagePill(percentage: dailyPercentageIncrease)
             }
             .bold()
         }
@@ -38,5 +38,5 @@ struct SymbolCardView: View {
 }
 
 #Preview {
-    SymbolCardView(cardTitle: "VUAG", cardDescription: "Vanguard S&P 500", price: 56569, dailyPercentageIncrease: 0.01)
+    SymbolCard(cardTitle: "VUAG", cardDescription: "Vanguard S&P 500", price: 56569, dailyPercentageIncrease: 0.01)
 }

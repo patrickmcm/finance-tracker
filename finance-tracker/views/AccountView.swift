@@ -30,6 +30,6 @@ struct AccountView: View {
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(SampleData())) {
     AccountView()
 }

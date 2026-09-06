@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PercentagePillView: View {
+struct PercentagePill: View {
     let percentage: Float
     
     var body: some View {
@@ -23,5 +23,5 @@ struct PercentagePillView: View {
 }
 
 #Preview {
-    PercentagePillView(percentage: 0.05)
+    PercentagePill(percentage: 0.05)
 }
