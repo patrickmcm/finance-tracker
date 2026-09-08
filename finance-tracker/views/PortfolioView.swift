@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PortfolioView: View {
     @State private var accountSheetOpen = false
@@ -42,10 +43,10 @@ struct PortfolioView: View {
                         }
                         Spacer()
                         VStack(alignment: .trailing,spacing: 10) {
-                            Text("£56,569")
+                            Text(networkManager.user.portfolioWorth, format: .currency(code: AppSettings.defaultCurrency))
                                 .font(.title)
                                 .bold()
-                            Text("£2,344")
+                            Text(networkManager.user.cashWorth, format: .currency(code: AppSettings.defaultCurrency))
                                 .font(.title2)
                         }
                     }
@@ -54,29 +55,12 @@ struct PortfolioView: View {
             }
             
             Section(header: Text("Accounts"), content: {
-                NavigationLink {
-                    Text("Western Markets")
-                } label: {
-                    SymbolCard(cardTitle: "Western Markets", cardDescription: "Stocks and Shares ISA", price: 30000, dailyPercentageIncrease: -0.01)
-                }
-                
-                NavigationLink {
-                    Text("Eastern Markets")
-                } label: {
-                    SymbolCard(cardTitle: "Eastern Markets", cardDescription: "Stocks and Shares ISA", price: 15000, dailyPercentageIncrease: 0.05)
-                }
-                
-                
-                NavigationLink {
-                    Text("Cash Fund")
-                } label: {
-                    SymbolCard(cardTitle: "Cash Fund", cardDescription: "Cash ISA", price: 2000, dailyPercentageIncrease: 0.005)
-                }
-                
-                NavigationLink {
-                    Text("Pension")
-                } label: {
-                    SymbolCard(cardTitle: "Pension", cardDescription: "SIPP", price: 14569, dailyPercentageIncrease: 0.5)
+                ForEach(networkManager.user.accounts) { account in
+                    NavigationLink {
+                        Text(account.name)
+                    } label: {
+                        SymbolCard(cardTitle: account.name, cardDescription: "Stocks and Shares ISA", price: account.value, percentageChange: -0.01)
+                    }
                 }
             })
             .headerProminence(.increased)
@@ -84,8 +68,10 @@ struct PortfolioView: View {
         .navigationTitle(Text("Portfolio"))
         .toolbar {
             ToolbarItemGroup {
-                Button("Search", systemImage: "magnifyingglass") {
-                    // search logic
+                NavigationLink {
+                    SearchView()
+                } label: {
+                    Image(systemName: "magnifyingglass")
                 }
                 
                 Button("My Account", systemImage: "person.circle") {
@@ -104,4 +90,6 @@ struct PortfolioView: View {
     NavigationStack {
         PortfolioView()
     }
+    .modelContainer(SampleSwiftData.shared.modelContainer)
+
 }

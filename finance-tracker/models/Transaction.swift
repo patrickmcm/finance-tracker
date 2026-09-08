@@ -25,7 +25,7 @@ enum TransactionType: String, CaseIterable, Identifiable {
 struct CashTransaction: Identifiable {
     let id: String
     let date: Date
-    let amount: Double
+    let amount: Decimal
     let status: TransactionStatus
     let type: TransactionType
 }

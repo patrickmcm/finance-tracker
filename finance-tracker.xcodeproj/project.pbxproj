@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		2EFC1D9E3048213200F4D16A /* finance-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "finance-tracker.app"; path = "/Users/patrickmcm/finance-tracker/finance-tracker/build/Debug-iphoneos/finance-tracker.app"; sourceTree = "<absolute>"; };
+		2EF2BCF7304F079B0090D1A6 /* finance-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "finance-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,6 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				2EFC1DA03048213200F4D16A /* finance-tracker */,
+				2EF2BCF7304F079B0090D1A6 /* finance-tracker.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,7 +59,7 @@
 			packageProductDependencies = (
 			);
 			productName = "finance-tracker";
-			productReference = 2EFC1D9E3048213200F4D16A /* finance-tracker.app */;
+			productReference = 2EF2BCF7304F079B0090D1A6 /* finance-tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

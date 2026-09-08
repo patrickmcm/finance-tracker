@@ -10,8 +10,8 @@ import SwiftUI
 struct SymbolCard: View {
     let cardTitle: String
     let cardDescription: String
-    let price: Float
-    let dailyPercentageIncrease: Float
+    let price: Decimal
+    let percentageChange: Double?
     
     var body: some View {
         HStack {
@@ -30,7 +30,9 @@ struct SymbolCard: View {
                 Text(price.formatted(.currency(code: AppSettings.defaultCurrency)))
                     .font(.body)
                     .fontWeight(.semibold)
-                PercentagePill(percentage: dailyPercentageIncrease)
+                if percentageChange != nil {
+                    PercentagePill(percentage: percentageChange!)
+                }
             }
             .bold()
         }
@@ -38,5 +40,5 @@ struct SymbolCard: View {
 }
 
 #Preview {
-    SymbolCard(cardTitle: "VUAG", cardDescription: "Vanguard S&P 500", price: 56569, dailyPercentageIncrease: 0.01)
+    SymbolCard(cardTitle: "VUAG", cardDescription: "Vanguard S&P 500", price: 56569, percentageChange: 0.01)
 }

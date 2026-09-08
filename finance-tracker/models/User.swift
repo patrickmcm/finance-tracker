@@ -17,7 +17,9 @@ struct User {
     let firstName: String
     let lastName: String
     
-    var netWorth: Double
+    var portfolioWorth: Decimal
+    var cashWorth: Decimal
     var cashTransactions: [CashTransaction]
+    var accounts: [Account]
     
 }

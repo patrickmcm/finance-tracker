@@ -15,9 +15,10 @@ enum AccountType: String, CaseIterable, Identifiable {
     var id: Self {self}
 }
 
-struct Account {
+struct Account: Identifiable {
+    let id: String
     let name: String
     let accountType: AccountType
     
-    var value: Double
+    var value: Decimal
 }

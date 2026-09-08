@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PercentagePill: View {
-    let percentage: Float
+    let percentage: Double
     
     var body: some View {
         VStack {
