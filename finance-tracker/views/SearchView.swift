@@ -10,10 +10,11 @@ import SwiftData
 
 struct SearchView: View {
     @State var searchText: String = ""
+    @State private var isSearchPresented = true
     
     var body: some View {
         SymbolListView(searchText: searchText)
-        .searchable(text: $searchText)
+            .searchable(text: $searchText, isPresented: $isSearchPresented)
         .navigationTitle("Search")
         .navigationBarTitleDisplayMode(.inline)
     }

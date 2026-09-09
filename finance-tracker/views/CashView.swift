@@ -10,6 +10,10 @@ import SwiftUI
 struct CashView: View {
     
     @Environment(NetworkManager.self) private var networkManager
+    @Environment(\.dismiss) private var dismiss
+    
+    @State private var isPresented: Bool = false
+    @State private var txType: CashTransactionType = .DEPOSIT
     
     var body: some View {
         List {
@@ -17,18 +21,18 @@ struct CashView: View {
                 VStack(spacing: 8) {
                     HStack {
                         Spacer()
-                        Text("£2,344")
+                        Text(networkManager.user.availableCash, format: .currency(code: AppSettings.defaultCurrency))
                         Spacer()
                     }
-                    .font(.system(size: 64))
+                    .font(.largeTitle)
                     .bold()
                     HStack {
                         Spacer()
                         Image(systemName: "hourglass")
-                        Text("£144")
+                        Text(networkManager.user.totalCash - networkManager.user.availableCash, format: .currency(code: AppSettings.defaultCurrency))
                         Spacer()
                     }
-                    .font(.system(size: 32))
+                    .font(.title)
                     .foregroundStyle(.secondary)
                 }
             }
@@ -46,13 +50,23 @@ struct CashView: View {
             .headerProminence(.increased)
         }
         .navigationTitle("Cash")
+        .sheet(isPresented: $isPresented) {
+            if txType == .DEPOSIT {
+                NavigationStack {
+                    DepositView()
+                }
+                
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             HStack {
                 Button("Deposit") {
-                    
+                    txType = .DEPOSIT
+                    isPresented.toggle()
                 }
                 Button("Withdraw") {
-                    
+                    txType = .WITHDRAWAL
+                    isPresented.toggle()
                 }
             }
             .frame(maxWidth: .infinity)

@@ -38,16 +38,16 @@ struct PortfolioView: View {
                                 .font(.title)
                                 .bold()
                             Text("Cash")
-                                .font(.title2)
+                                .font(.title)
+                                .bold()
                             
                         }
                         Spacer()
                         VStack(alignment: .trailing,spacing: 10) {
                             Text(networkManager.user.portfolioWorth, format: .currency(code: AppSettings.defaultCurrency))
                                 .font(.title)
-                                .bold()
-                            Text(networkManager.user.cashWorth, format: .currency(code: AppSettings.defaultCurrency))
-                                .font(.title2)
+                            Text(networkManager.user.totalCash, format: .currency(code: AppSettings.defaultCurrency))
+                                .font(.title)
                         }
                     }
                     .padding(5)
@@ -57,9 +57,9 @@ struct PortfolioView: View {
             Section(header: Text("Accounts"), content: {
                 ForEach(networkManager.user.accounts) { account in
                     NavigationLink {
-                        Text(account.name)
+                        AccountView(account: account)
                     } label: {
-                        SymbolCard(cardTitle: account.name, cardDescription: "Stocks and Shares ISA", price: account.value, percentageChange: -0.01)
+                        SymbolCard(cardTitle: account.name, cardDescription: "Stocks and Shares ISA", price: account.getValue(), percentageChange: -0.01)
                     }
                 }
             })
@@ -78,7 +78,7 @@ struct PortfolioView: View {
                     accountSheetOpen.toggle()
                 }
                 .sheet(isPresented: $accountSheetOpen) {
-                    AccountView()
+                    UserSettingsView()
                 }
             }
         }
@@ -91,5 +91,4 @@ struct PortfolioView: View {
         PortfolioView()
     }
     .modelContainer(SampleSwiftData.shared.modelContainer)
-
 }

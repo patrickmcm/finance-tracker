@@ -17,8 +17,18 @@ enum AccountType: String, CaseIterable, Identifiable {
 
 struct Account: Identifiable {
     let id: String
-    let name: String
+    var name: String
     let accountType: AccountType
     
-    var value: Decimal
+    var symbols: [AccountSymbol]
+    var actions: [MarketAction]
+    
+    func getValue() -> Decimal {
+        var totalWorth: Decimal = 0
+        for symbol in symbols {
+            totalWorth += symbol.units * (symbol.marketSymbol.priceData.first?.marketAsk ?? 0)
+        }
+        
+        return totalWorth
+    }
 }

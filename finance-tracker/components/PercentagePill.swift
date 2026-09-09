@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct PercentagePill: View {
-    let percentage: Double
+    let percentage: Double?
     
     var body: some View {
         VStack {
-            Text("\(percentage, specifier: "%.2f")%")
+            Text(percentage != nil ? "\(percentage!, specifier: "%.2f")%" : "-.--%")
                 .padding(5)
                 .bold()
         }
         .frame(minWidth:80)
         .foregroundStyle(.white)
-        .background(percentage > 0 ? .green : .red, in: RoundedRectangle(cornerRadius: 5))
+        .background(percentage != nil ? (percentage! > 0 ? .green : .red) : .gray, in: RoundedRectangle(cornerRadius: 5))
     }
 }
 

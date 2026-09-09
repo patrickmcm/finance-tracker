@@ -15,7 +15,7 @@ enum TransactionStatus: String, CaseIterable, Identifiable {
     var id: Self {self}
 }
 
-enum TransactionType: String, CaseIterable, Identifiable {
+enum CashTransactionType: String, CaseIterable, Identifiable {
     case WITHDRAWAL = "Withdrawal"
     case DEPOSIT = "Deposit"
     
@@ -27,5 +27,5 @@ struct CashTransaction: Identifiable {
     let date: Date
     let amount: Decimal
     let status: TransactionStatus
-    let type: TransactionType
+    let type: CashTransactionType
 }

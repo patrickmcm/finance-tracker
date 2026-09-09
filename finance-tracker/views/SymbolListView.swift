@@ -27,7 +27,7 @@ struct SymbolListView: View {
                 }
                 let latestAsk = sortedPrices.first?.marketAsk ?? 0
                 
-                SymbolCard(cardTitle: symbol.ticker, cardDescription: symbol.symbolName, price: latestAsk, percentageChange: nil)
+                SymbolCard(cardTitle: symbol.ticker, cardDescription: symbol.fullName, price: latestAsk, percentageChange: nil)
             }
         }
     }

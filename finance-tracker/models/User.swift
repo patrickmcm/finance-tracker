@@ -13,13 +13,13 @@ struct AppSettings {
 
 struct User {
     let id: String
-    let email: String
-    let firstName: String
-    let lastName: String
-    
+    var email: String
+    var firstName: String
+    var lastName: String
     var portfolioWorth: Decimal
-    var cashWorth: Decimal
+    var totalCash: Decimal
+    var availableCash: Decimal
+    
     var cashTransactions: [CashTransaction]
     var accounts: [Account]
-    
 }

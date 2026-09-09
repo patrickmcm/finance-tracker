@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct finance_trackerApp: App {
@@ -15,6 +16,9 @@ struct finance_trackerApp: App {
         WindowGroup {
             ContentView()
                 .environment(networkManager)
+                .modelContainer(for: [
+                    MarketSymbol.self
+                ])
         }
     }
 }

@@ -37,7 +37,6 @@ class SampleSwiftData {
     private init() {
         let schema = Schema([
             MarketSymbol.self,
-            MarketSymbolPriceData.self
         ])
         
         let modelConfig = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
@@ -56,10 +55,6 @@ class SampleSwiftData {
     private func insertSampleData() {
         for symbol in MarketSymbol.sampleData {
             context.insert(symbol)
-        }
-        
-        for symbolData in MarketSymbolPriceData.sampleData {
-            context.insert(symbolData)
         }
     }
     
