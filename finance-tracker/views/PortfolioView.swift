@@ -10,21 +10,14 @@ import SwiftData
 
 struct PortfolioView: View {
     @State private var accountSheetOpen = false
+    @State private var chartEngine: ChartEngine<UserValue> = ChartEngine()
     
     @Environment(NetworkManager.self) private var networkManager
     
     var body: some View {
         List {
             Section {
-                HStack {
-                    Spacer()
-                    Text("graph placeholder")
-                        .font(.title)
-                    Spacer()
-                }
-                .frame(height: 153)
-                .padding(.vertical, 10)
-                .padding(.horizontal, 10)
+                SymbolChart(priceData: networkManager.user.historicalPortfolioWorth, chartEngine: chartEngine)
             }
             
             
@@ -59,7 +52,7 @@ struct PortfolioView: View {
                     NavigationLink {
                         AccountView(account: account)
                     } label: {
-                        SymbolCard(cardTitle: account.name, cardDescription: "Stocks and Shares ISA", price: account.getValue(), percentageChange: -0.01)
+                        SymbolCard(cardTitle: account.name, cardDescription: "Stocks and Shares ISA", price: account.getValue(), percentageChange: nil)
                     }
                 }
             })

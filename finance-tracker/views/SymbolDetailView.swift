@@ -12,8 +12,9 @@ import Charts
 struct SymbolDetailView: View {
     var marketSymbol: MarketSymbol
     
-    @State private var isPresented = false
-    @State private var txType: MarketActionType = .BUY
+    @State private var action: MarketActionType?
+    
+    @State private var chartEngine: ChartEngine<MarketSymbolPriceData> = ChartEngine()
     
     var body: some View {
         List {
@@ -23,25 +24,29 @@ struct SymbolDetailView: View {
                 }
                 let latest = sortedPrices.first
                 
-                PriceCard(price: latest!.marketAsk, timestamp: latest!.timestamp, percentageChange: 5)
-            }
-            Section {
-                Chart(marketSymbol.priceData) {
-                    LineMark(x: .value("Date", $0.timestamp), y: .value("Price", $0.marketAsk))
-                }
-            }
+                let visibleData = chartEngine.visibleData(priceData: marketSymbol.priceData)
+                
+                let first = visibleData.first
+                let last = visibleData.last
+                
+                let percentageChange: Decimal = (((last?.value ?? 0) - (first?.value ?? 0)) / (last?.value ?? 1))*100
+                
+            
+                PriceCard(price: latest!.marketAsk, timestamp: latest!.timestamp, percentageChange: Double(truncating: percentageChange as NSNumber))
+            
+                SymbolChart(priceData: marketSymbol.priceData, chartEngine: chartEngine)
         }
+    }
+        .listStyle(.grouped)
         .navigationTitle(marketSymbol.ticker)
         .navigationSubtitle(marketSymbol.fullName)
         .safeAreaInset(edge: .bottom) {
             HStack {
                 Button("Buy") {
-                    txType = .BUY
-                    isPresented.toggle()
+                    action = .BUY
                 }
                 Button("Sell") {
-                    txType = .SELL
-                    isPresented.toggle()
+                    action = .SELL
                 }
             }
             .frame(maxWidth: .infinity)
@@ -50,7 +55,12 @@ struct SymbolDetailView: View {
             .buttonSizing(.flexible)
             .buttonStyle(.glass)
         }
-    }
+        .sheet(item: $action) { action in
+            NavigationStack {
+                MarketActionView(action: action, symbol: marketSymbol)
+            }
+        }
+}
 }
 
 #Preview {

@@ -52,8 +52,35 @@ class SampleSwiftData {
         }
     }
     
+    private func generateMockStockData(days: Int = 30, startingPrice: Decimal = 150.0) -> [MarketSymbolPriceData] {
+        var dataPoints: [MarketSymbolPriceData] = []
+        let calendar = Calendar.current
+        var currentPrice: Decimal = startingPrice
+        
+        for i in 0..<days {
+            // Calculate a random percentage change between -2% and +2.2% (slight upward bias)
+            let changePercent = Decimal(Double.random(in: -0.022...0.02))
+            currentPrice = currentPrice * (1.0 + changePercent)
+            
+            // Ensure price never drops to zero or below
+            currentPrice = max(currentPrice, 1.0)
+            
+            // Generate past dates leading up to today
+            if let date = calendar.date(byAdding: .day, value: -i, to: Date()) {
+                dataPoints.append(MarketSymbolPriceData(timestamp: date, marketBid: currentPrice, marketAsk: currentPrice))
+            }
+        }
+        
+        // Sort chronologically so the chart draws left-to-right
+        return dataPoints.sorted(by: { $0.timestamp < $1.timestamp })
+    }
+    
     private func insertSampleData() {
         for symbol in MarketSymbol.sampleData {
+            if symbol.ticker == "VUAG" {
+                symbol.priceData = generateMockStockData(days: 1000, startingPrice: 150)
+            }
+            
             context.insert(symbol)
         }
     }

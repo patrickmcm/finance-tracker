@@ -15,10 +15,12 @@ enum MarketSymbolType: String, CaseIterable, Identifiable, Codable {
     var id: Self {self}
 }
 
-struct MarketSymbolPriceData: Codable, Identifiable {
+struct MarketSymbolPriceData: Codable, Identifiable, ChartDataPoint {
     var timestamp: Date
     var marketBid: Decimal
     var marketAsk: Decimal
+    
+    var value: Decimal {marketAsk}
     
     var id: Date {timestamp}
 }
@@ -46,6 +48,7 @@ class MarketSymbol {
     static let sampleData: [MarketSymbol] = [
         MarketSymbol(isin: "IE00BFMXXD54", symbolName: "VANGUARD S&P 500 UCITS ETF", ticker: "VUAG", symbolType: .ETF, priceData: [
             MarketSymbolPriceData(timestamp: .now, marketBid: 107.5, marketAsk: 107.6),
+            MarketSymbolPriceData(timestamp: .init(timeIntervalSinceNow: -60*60*24), marketBid: 105.5, marketAsk: 105.6),
             MarketSymbolPriceData(timestamp: .init(timeIntervalSinceNow: -60*60*24), marketBid: 105.5, marketAsk: 105.6),
         ]),
         MarketSymbol(isin: "LU1230136894", symbolName: "AMUNDI SMART OVERNIGHT RETURN GBP HEDGED", ticker: "CSH2", symbolType: .ETF, priceData: [

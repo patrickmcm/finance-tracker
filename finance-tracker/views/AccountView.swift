@@ -9,20 +9,14 @@ import SwiftUI
 import SwiftData
 
 struct AccountView: View {
+    @State private var chartEngine: ChartEngine<AccountValue> = ChartEngine()
+    
     let account: Account
     
     var body: some View {
         List {
             Section {
-                HStack {
-                    Spacer()
-                    Text("graph placeholder")
-                        .font(.title)
-                    Spacer()
-                }
-                .frame(height: 153)
-                .padding(.vertical, 10)
-                .padding(.horizontal, 10)
+                SymbolChart(priceData: account.historicalValue, chartEngine: chartEngine)
             }
             
             Section {

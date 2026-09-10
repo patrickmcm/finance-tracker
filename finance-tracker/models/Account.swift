@@ -15,6 +15,13 @@ enum AccountType: String, CaseIterable, Identifiable {
     var id: Self {self}
 }
 
+struct AccountValue: ChartDataPoint, Identifiable {
+    let timestamp: Date
+    let value: Decimal
+    
+    var id: Date {timestamp}
+}
+
 struct Account: Identifiable {
     let id: String
     var name: String
@@ -22,6 +29,7 @@ struct Account: Identifiable {
     
     var symbols: [AccountSymbol]
     var actions: [MarketAction]
+    var historicalValue: [AccountValue]
     
     func getValue() -> Decimal {
         var totalWorth: Decimal = 0

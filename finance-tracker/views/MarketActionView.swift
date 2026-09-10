@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MarketActionView: View {
-    let action: MarketAction
+    let action: MarketActionType
+    let symbol: MarketSymbol
     
     @Environment(\.dismiss) private var dismiss
     
@@ -25,7 +26,7 @@ struct MarketActionView: View {
                 }
                 .pickerStyle(.segmented)
                 
-                PriceCard(price: action.symbol.priceData[0].marketAsk, timestamp: action.symbol.priceData[0].timestamp, percentageChange: 5)
+                PriceCard(price: symbol.priceData[0].marketAsk, timestamp: symbol.priceData[0].timestamp, percentageChange: 5)
                 
                 TextField("Amount", value: $amount, format: .currency(code: AppSettings.defaultCurrency))
                     .keyboardType(.numberPad)
@@ -56,7 +57,7 @@ struct MarketActionView: View {
                     }
                     
             } label: {
-                Text("\(action.type.rawValue)")
+                Text("\(action.rawValue)")
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 25)
@@ -64,8 +65,23 @@ struct MarketActionView: View {
             .buttonSizing(.flexible)
             .buttonStyle(.glassProminent)
         }
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Dismiss", systemImage: "xmark") {
+                    dismiss()
+                }
+            }
+            
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Done", systemImage: "checkmark") {
+                    dismiss()
+                }
+                .buttonStyle(.glassProminent)
+                .disabled(true)
+            }
+        }
         .animation(.easeInOut, value: actionMethod)
-        .navigationTitle(action.type.rawValue)
+        .navigationTitle(action.rawValue)
     }
 }
 
@@ -73,6 +89,6 @@ struct MarketActionView: View {
     let action = NetworkManager(test: true).user.accounts[0].actions[0]
     
     NavigationStack {
-        MarketActionView(action: action)
+        MarketActionView(action: .BUY, symbol: action.symbol)
     }
 }

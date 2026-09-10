@@ -11,6 +11,13 @@ struct AppSettings {
     static let defaultCurrency = "GBP"
 }
 
+struct UserValue: ChartDataPoint, Identifiable {
+    let timestamp: Date
+    let value: Decimal
+    
+    var id: Date {timestamp}
+}
+
 struct User {
     let id: String
     var email: String
@@ -19,6 +26,8 @@ struct User {
     var portfolioWorth: Decimal
     var totalCash: Decimal
     var availableCash: Decimal
+    
+    var historicalPortfolioWorth: [UserValue]
     
     var cashTransactions: [CashTransaction]
     var accounts: [Account]
