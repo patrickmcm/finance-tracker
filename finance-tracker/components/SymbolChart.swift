@@ -80,7 +80,8 @@ struct SymbolChart<T: ChartDataPoint>: View {
         Chart(chartEngine.visibleData(priceData: priceData)) { point in
             LineMark(x: .value("Date", point.timestamp), y: .value("Price", point.value))
         }
-        .frame(width: .infinity, height: 200)
+        .frame(maxWidth: .infinity)
+        .frame(height: 200)
         .chartYScale(domain: .automatic(includesZero: false))
     }
 }

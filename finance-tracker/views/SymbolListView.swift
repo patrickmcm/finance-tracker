@@ -12,11 +12,15 @@ struct SymbolListView: View {
     @Query private var marketSymbols: [MarketSymbol]
     
     init(searchText: String = "") {
-        let predicate = #Predicate<MarketSymbol> { symbol in
-            searchText.isEmpty || symbol.ticker.localizedStandardContains(searchText)
-        }
+        var descriptor = FetchDescriptor<MarketSymbol>(
+            predicate: #Predicate<MarketSymbol> { symbol in
+                searchText.isEmpty || symbol.ticker.localizedStandardContains(searchText)
+            }
+        )
         
-        _marketSymbols = Query(filter: predicate)
+        descriptor.fetchLimit = 10
+        
+        _marketSymbols = Query(descriptor)
     }
     
     var body: some View {

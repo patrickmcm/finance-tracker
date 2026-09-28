@@ -9,9 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var context
+    @Environment(NetworkManager.self) private var networkManager
+    
     var body: some View {
         NavigationStack {
             PortfolioView()
+                .task {
+                    await networkManager.update(context: context)
+                }
         }
     }
 }

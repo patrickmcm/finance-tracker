@@ -1,0 +1,3 @@
+[submodule "finance-tracker/Sources/Protos/finance-tracker-protobufs"]
+	path = finance-tracker/Sources/Protos/finance-tracker-protobufs
+	url = https://github.com/patrickmcm/finance-tracker-protobufs
