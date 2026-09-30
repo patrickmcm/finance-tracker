@@ -26,10 +26,8 @@ struct SymbolListView: View {
     var body: some View {
         List {
             ForEach(marketSymbols) { symbol in
-                let sortedPrices = symbol.priceData.sorted { first, second in
-                    first.timestamp > second.timestamp
-                }
-                let latestAsk = sortedPrices.first?.marketAsk ?? 0
+                let sortedPrices = SampleSwiftData.shared.generateMockStockData(days: 1000, startingPrice: 150)
+                let latestAsk = sortedPrices.first?.close ?? 0
                 
                 SymbolCard(cardTitle: symbol.ticker, cardDescription: symbol.fullName, price: latestAsk, percentageChange: nil)
             }

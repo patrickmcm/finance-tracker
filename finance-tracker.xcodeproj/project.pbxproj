@@ -18,10 +18,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2EF2BCF7304F079B0090D1A6 /* finance-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "finance-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EF2BCF7304F079B0090D1A6 /* finance-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "finance-tracker.app"; path = "/Users/patrickmcm/finance-tracker/finance-tracker/build/Debug-iphoneos/finance-tracker.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2E31F7CD306D58DA00713804 /* Products */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Products;
+			sourceTree = "<group>";
+		};
 		2EFC1DA03048213200F4D16A /* finance-tracker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "finance-tracker";
@@ -51,8 +56,8 @@
 		2EFC1D953048213200F4D16A = {
 			isa = PBXGroup;
 			children = (
+				2E31F7CD306D58DA00713804 /* Products */,
 				2EFC1DA03048213200F4D16A /* finance-tracker */,
-				2EF2BCF7304F079B0090D1A6 /* finance-tracker.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +81,7 @@
 				2E88EA4F30680F100075C767 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				2E31F7CD306D58DA00713804 /* Products */,
 				2EFC1DA03048213200F4D16A /* finance-tracker */,
 			);
 			name = "finance-tracker";

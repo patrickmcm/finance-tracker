@@ -34,6 +34,12 @@ class SampleSwiftData {
         MarketSymbol.sampleData.first
     }
     
+    var priceData = [
+        MarketSymbolPriceData(timestamp: .now, open: 107.5, close: 107.6, high: 108, low: 107),
+        MarketSymbolPriceData(timestamp: .init(timeIntervalSinceNow: -60*60*24), open: 105.5, close: 105.6, high: 106, low: 104),
+        MarketSymbolPriceData(timestamp: .init(timeIntervalSinceNow: -60*60*24), open: 105.5, close: 105.6, high: 107, low: 103),
+    ]
+    
     private init() {
         let schema = Schema([
             MarketSymbol.self,
@@ -52,7 +58,7 @@ class SampleSwiftData {
         }
     }
     
-    private func generateMockStockData(days: Int = 30, startingPrice: Decimal = 150.0) -> [MarketSymbolPriceData] {
+    func generateMockStockData(days: Int = 30, startingPrice: Decimal = 150.0) -> [MarketSymbolPriceData] {
         var dataPoints: [MarketSymbolPriceData] = []
         let calendar = Calendar.current
         var currentPrice: Decimal = startingPrice
@@ -67,7 +73,7 @@ class SampleSwiftData {
             
             // Generate past dates leading up to today
             if let date = calendar.date(byAdding: .day, value: -i, to: Date()) {
-                dataPoints.append(MarketSymbolPriceData(timestamp: date, marketBid: currentPrice, marketAsk: currentPrice))
+                dataPoints.append(MarketSymbolPriceData(timestamp: date, open: currentPrice, close: currentPrice, high: currentPrice+1, low: currentPrice-1))
             }
         }
         
@@ -77,10 +83,6 @@ class SampleSwiftData {
     
     private func insertSampleData() {
         for symbol in MarketSymbol.sampleData {
-            if symbol.ticker == "VUAG" {
-                symbol.priceData = generateMockStockData(days: 1000, startingPrice: 150)
-            }
-            
             context.insert(symbol)
         }
     }

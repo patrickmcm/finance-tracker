@@ -86,10 +86,11 @@ struct SymbolChart<T: ChartDataPoint>: View {
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(SampleData())) {
     @Previewable @State var chartEngine = ChartEngine<MarketSymbolPriceData>()
-    let symbol = MarketSymbol.sampleData[0]
-
-    SymbolChart(priceData: symbol.priceData, chartEngine: chartEngine)
+    
+    let priceData = SampleSwiftData.shared.generateMockStockData(days: 1000, startingPrice: 150)
+    
+    SymbolChart(priceData: priceData, chartEngine: chartEngine)
         .modelContainer(SampleSwiftData.shared.modelContainer)
 }

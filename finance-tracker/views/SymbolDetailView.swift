@@ -14,27 +14,22 @@ struct SymbolDetailView: View {
     
     @State private var action: MarketActionType?
     
+    @State private var prices: [MarketSymbolPriceData] = []
+    
     @State private var chartEngine: ChartEngine<MarketSymbolPriceData> = ChartEngine()
     
     var body: some View {
         List {
             Section {
-                let sortedPrices = marketSymbol.priceData.sorted { first, second in
-                    first.timestamp > second.timestamp
-                }
-                let latest = sortedPrices.first
-                
-                let visibleData = chartEngine.visibleData(priceData: marketSymbol.priceData)
-                
-                let first = visibleData.first
-                let last = visibleData.last
-                
-                let percentageChange: Decimal = (((last?.value ?? 0) - (first?.value ?? 0)) / (last?.value ?? 1))*100
+                let first = prices.first
+                let last = prices.last
+
+                let percentageChange: Decimal = (((last?.close ?? 0) - (first?.close ?? 0)) / (last?.close ?? 1))*100
                 
             
-                PriceCard(price: latest!.marketAsk, timestamp: latest!.timestamp, percentageChange: Double(truncating: percentageChange as NSNumber))
+                PriceCard(price: last?.close ?? 0, timestamp: last?.timestamp ?? .now, percentageChange: Double(truncating: percentageChange as NSNumber))
             
-                SymbolChart(priceData: marketSymbol.priceData, chartEngine: chartEngine)
+                SymbolChart(priceData: prices, chartEngine: chartEngine)
         }
     }
         .listStyle(.grouped)
@@ -60,11 +55,14 @@ struct SymbolDetailView: View {
                 MarketActionView(action: action, symbol: marketSymbol)
             }
         }
+        .task {
+            self.prices = await MarketSymbolPriceData.getPriceData(marketSymbol: self.marketSymbol, dateFrom: .distantPast, dateTo: .now)
+        }
 }
 }
 
 #Preview {
-    @Previewable @State var marketSymbol = MarketSymbol.sampleData[0]
+    @Previewable @State var marketSymbol = MarketSymbol(isin: "IE000J7QYHD8", symbolName: "ABRDN ARAW UCITS ETF - GBX", ticker: "ARAW", currency: "GBX", symbolType: .ETF)
     
     NavigationStack {
         SymbolDetailView(marketSymbol: marketSymbol)

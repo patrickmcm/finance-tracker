@@ -60,6 +60,5 @@ class NetworkManager {
     
     func update(context: ModelContext) async {
         await MarketSymbolDTO.refresh(context: context)
-        
     }
 }

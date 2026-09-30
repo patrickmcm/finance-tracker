@@ -26,7 +26,9 @@ struct MarketActionView: View {
                 }
                 .pickerStyle(.segmented)
                 
-                PriceCard(price: symbol.priceData[0].marketAsk, timestamp: symbol.priceData[0].timestamp, percentageChange: 5)
+                let priceData = SampleSwiftData.shared.generateMockStockData(days: 1500, startingPrice: 150)
+                
+                PriceCard(price: priceData[0].close, timestamp: priceData[0].timestamp, percentageChange: 5)
                 
                 TextField("Amount", value: $amount, format: .currency(code: AppSettings.defaultCurrency))
                     .keyboardType(.numberPad)

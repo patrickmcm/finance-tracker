@@ -33,10 +33,12 @@ struct AccountView: View {
             
             Section("Instruments") {
                 ForEach(account.symbols) { symbol in
+                    let priceData = SampleSwiftData.shared.generateMockStockData(days:1000, startingPrice: 150)
+                    
                     NavigationLink {
                         SymbolDetailView(marketSymbol: symbol.marketSymbol)
                     } label: {
-                        SymbolCard(cardTitle: symbol.marketSymbol.ticker, cardDescription: symbol.marketSymbol.fullName, price: symbol.units * symbol.marketSymbol.priceData[0].marketAsk, percentageChange: nil)
+                        SymbolCard(cardTitle: symbol.marketSymbol.ticker, cardDescription: symbol.marketSymbol.fullName, price: symbol.units * priceData[0].close, percentageChange: nil)
                     }
 
                 }

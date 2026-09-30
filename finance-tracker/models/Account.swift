@@ -34,7 +34,7 @@ struct Account: Identifiable {
     func getValue() -> Decimal {
         var totalWorth: Decimal = 0
         for symbol in symbols {
-            totalWorth += symbol.units * (symbol.marketSymbol.priceData.first?.marketAsk ?? 0)
+            totalWorth += symbol.units
         }
         
         return totalWorth
